@@ -37,7 +37,7 @@ Step 5 & 6 should look something like this:
 
 ###Step 7
 
-Add the following Javascript
+Add the following Javascript after requirejs and ionic-bootstrap scripts, it can be in the `<head>` or at the bottom of `<body>`
 
 ```javascript
 var bootstrap = {
