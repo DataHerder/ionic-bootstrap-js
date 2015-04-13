@@ -21,13 +21,13 @@ In your index.html
 Replace: `<body ng-app="starter">` with `<body id="[your_app_name]">`
 
 ###Step 4
-Clone this into a directory of your choice with the js/ folder, preferrably js/vendors
+Clone ionic-bootstrap.js into a directory of your choice within the js/ folder, preferrably js/vendors
 
 ###Step 5
-Add <a href="http://requirejs.org/">RequireJS</a> to your js/ subfolder underneath the other `<script>` tags
+Add <a href="http://requirejs.org/">RequireJS</a> to your js/ subfolder
 
 ###Step 6
-Add to your library the ionic bootstrap
+In index.html, add requirejs and ionic-bootstrap scripts underneath the application scripts.
 
 Step 5 & 6 should look something like this:
 ```
@@ -41,23 +41,23 @@ Add the following Javascript
 
 ```javascript
 var bootstrap = {
-  states: {
-      // 'tab-dash' is the history stack! Every new template and controller added
-      // will be apart of that history stack for ionic
-			'tab-dash': {
-			  // 'folder': 'state->template->controller'
-				'': ['tab-dash']
-			},
-			'tab-settings': {
-				'': ['tab-settings']
-			},
-			'tab-profile': {
-				'': ['tab-profile']
-			},
-			'chat-detail': {
-				'': ['chat-detail']
-			},
-  }
+	states: {
+		// 'tab-dash' is the history stack! Every new template and controller added
+		// will be apart of that history stack for ionic
+		'tab-dash': {
+		  // 'folder': 'state->template->controller'
+			'': ['tab-dash']
+		},
+		'tab-settings': {
+			'': ['tab-settings']
+		},
+		'tab-profile': {
+			'': ['tab-profile']
+		},
+		'chat-detail': {
+			'': ['chat-detail']
+		},
+	}
 };
 
 IonicBootstrap.root_index = '/tab/tab-dash';
@@ -73,7 +73,7 @@ IonicBootstrap.init(bootstrap, {log_states: true}, function(angular_app_instanti
 
 ###Step 8
 
-Refresh with chrom developer tools and check for loading errors on controllers, you should find them.  This is what helps you modularize your code, you'll notice that each controller is expected to be in it's own file named exactly as the controller in the same name as the template (you can change this behavior with some sugar, but I haven't documented that yet), for example: chat-detail => ChatDetailCtrl in js/controllers/ChatDetailCtrl.js.  Add the following files and keep them empty since the controllers are in controller.js.  Ionic puts them into one file, you can change that later if need be.
+Refresh with chrome developer tools enabled and check for loading errors on controllers, you should find them.  This is what helps you modularize your code, you'll notice that each controller is expected to be in it's own file named exactly as the controller in the same name as the template (you can change this behavior with some sugar, but I haven't documented that yet), for example: chat-detail => ChatDetailCtrl in js/controllers/ChatDetailCtrl.js.  Add the following files and keep them empty since the controllers are in controller.js.  Ionic puts them into one file, you can change that later if need be.
 
 Then it should run once the controller files have been added.  You can see here that it forces modularization and organizing of your code.
 
