@@ -78,3 +78,23 @@ Refresh with chrome developer tools enabled and check for loading errors on cont
 Then it should run once the controller files have been added.  You can see here that it forces modularization and organizing of your code.
 
 If you like it contribute please! :-)
+
+##Other things to consider
+###Controllers, Services, Directives, oh my!
+
+Angular allows you to assign to a variable the controllers, services and directives to a variable as such:
+
+```javascript
+var App = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services']);
+var Controllers = angular.module('starter.controllers', []);
+var Services = angular.module('starter.services', []);
+```
+
+I recommend doing this.  In your controller files specify 
+```javascript
+Controller.controller('MyControllerCtrl', function($scope) {
+	// some controller code
+});
+``` 
+
+And same with services.  I think it helps.  In your app.js, eventually you take all the controllers and services out and add them as separate files.
