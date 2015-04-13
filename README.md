@@ -68,7 +68,6 @@ var bootstrap = {
 
 IonicBootstrap.root_index = '/tab/tab-dash';
 IonicBootstrap.app_name = '[your_app_name]';
-IonicBootstrap.angular = [YourAppVariable]; // I use App
 IonicBootstrap.init(bootstrap, {log_states: true}, function(angular_app_instantiation_function) {
   // you can optionally pass a callback function into ionic bootstrap to do some more stuff before
   // instantiating the application
