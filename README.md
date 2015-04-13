@@ -164,17 +164,6 @@ In your app.js file, you'll see that Ionic sets the states within the .config me
 					controller: 'AccountCtrl'
 				}
 			}
-		})
-
-		.state('tab.FlashCardsCtrl', {
-			name: "tab.FlashCardsCtrl",
-			url: "/flashcards/flash-cards",
-			views: {
-				flashcards: {
-					controller: "FlashcardsCtrl",
-					templateUrl: "templates/flashcards/flash-cards.html"
-				}
-			}
 		})*/
 	;
 });
