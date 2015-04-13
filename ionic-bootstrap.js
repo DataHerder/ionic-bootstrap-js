@@ -115,6 +115,12 @@ var IonicBootstrap = {
 	// options that are passed through init: function()
 	options: {},
 
+	// the root index, used for which state to go back to if a view error occurs
+	root_index: '/tab/tab-dash',
+
+	// ionic app name and id used for the application
+	app_name: 'starter',
+
 
 	/**
 	 * IonicBootstrap has one public function: init()
@@ -124,7 +130,13 @@ var IonicBootstrap = {
 	 * @param options
 	 * @param callback_function
 	 */
-	init: function(ionic_bootstrap_data, options, callback_function) {
+	init: function(ionic_bootstrap_data, options, callback_function)
+	{
+		// keep namespace obscure
+		String.prototype.__ionic_capitalize__ = function() {
+			return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+		};
+
 		this.options = options || {};
 		var cb = callback_function || false,
 			state_instantiations = undefined
@@ -237,7 +249,7 @@ var IonicBootstrap = {
 				self._runList(list[i], prep, self);
 			}
 		} else if (which_type == 'string') {
-			self.require_list.push(prep + list);
+			self.require_list.push((prep + list).replace(/\/{2,}/,'/'));
 		}
 	},
 
@@ -271,14 +283,14 @@ var IonicBootstrap = {
 					}
 					$stateProvider.state(obj['name'], obj['params']);
 				}
-				$urlRouterProvider.otherwise('/tab/main/home-screen');
+				$urlRouterProvider.otherwise(self.root_index);
 			});
 			if (cb) {
 				cb(function(){
-					angular.bootstrap(document.getElementById('starter'), ['starter'])
+					angular.bootstrap(document.getElementById(self.app_name), [self.app_name])
 				});
 			} else {
-				angular.bootstrap(document.getElementById('starter'), ['starter'])
+				angular.bootstrap(document.getElementById(self.app_name), [self.app_name])
 			}
 		});
 	},
@@ -300,11 +312,11 @@ var IonicBootstrap = {
 							var url = this.states[root_state][dir][i],
 								template_name = url.replace(/(\/?\:.*)/, '').replace(/\/$/, ''),
 								controller_name = template_name.replace(/-/g, ' ')
-										.capitalize()
+										.__ionic_capitalize__()
 										.replace(/\s/g, '') + 'Ctrl',
-								// state object specific information
-								// states must have tab appended to it, state name
-								// will continue in as the controller name with a tab
+							// state object specific information
+							// states must have tab appended to it, state name
+							// will continue in as the controller name with a tab
 								state_name = 'tab.' + controller_name;
 
 							// override the template if it is found
@@ -320,13 +332,13 @@ var IonicBootstrap = {
 								'name': state_name,
 								params: {
 									// add the directory in at the last stage
-									'url': '/' + dir + '/' + url,
+									'url': ('/' + dir + '/' + url).replace(/\/{2,}/, '/'),
 									views: {}
 								}
 							};
 							temp_state['params']['views'][root_state] = {
 								// the template checks to see if the root directory is being overridden simply by checking for the /
-								templateUrl: 'templates/' + (template_replaced && /\//.test(template_name) ? '' : dir + '/') + template_name + '.html',
+								templateUrl: ('templates/' + (template_replaced && /\//.test(template_name) ? '' : dir + '/') + template_name + '.html').replace(/\/{2,}/, '/'),
 								controller: controller_name
 							};
 							this.state_objects.push(temp_state);
