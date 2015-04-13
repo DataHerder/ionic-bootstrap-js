@@ -108,7 +108,7 @@ And same with services.  I think it helps.  In your app.js, eventually you take 
 
 ###States
 
-In your app.js file, you'll see the states, IonicBootstrap will rewrite the states but you can simply delete them all except the abstract.  If you erase the abstract state, it will break.
+In your app.js file, you'll see that Ionic sets the states within the .config method.  IonicBootstrap will rewrite the states so you can simply delete them all except the abstract.  If you erase the abstract state, it will break.
 
 ```javascript
 .config(function($stateProvider, $urlRouterProvider) {
@@ -179,3 +179,37 @@ In your app.js file, you'll see the states, IonicBootstrap will rewrite the stat
 	;
 });
 ```
+
+The states can be problematic if you don't change everything needed.  When defining a new state within Ionic, you need to remember to change the ionic tab in tabs.html or it won't work.
+
+```javascript
+var bootstrap = {
+	states: {
+		// 'tab-dash' is the history stack! Every new template and controller added
+		// will be apart of that history stack for ionic
+		'tab-dash': {
+		  // 'folder': 'state->template->controller'
+			'': ['tab-dash']
+		},
+		'tab-settings': {
+			'': ['tab-settings']
+		},
+		'tab-profile': {
+			'': ['tab-profile']
+		},
+		'chat-detail': {
+			'': ['chat-detail']
+		},
+		// here I'm adding a new state history stack! 
+		// add in tabs.html a new tab with the ion-nav-view name="tab-hello-world"
+		// add in tabs.html the href of the new tab as "#/tab/tab-hello-world"
+		'tab-hello-world': {
+			// add in js/controllers/HelloWorldCtrl.js
+			// add in templates/hello-world.js
+			'': ['hello-world']
+		}
+	}
+};
+```
+
+This will help you quickly add new controllers, it will also quickly allow you to change state names, rename -> refactor -> etc...
