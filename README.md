@@ -36,7 +36,13 @@ Step 5 & 6 should look something like this:
 ```
 
 ###Step 7
+Add the variable `App` as the global application name in app.js as such:
 
+```javascript
+var App = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+```
+
+###Step 8
 Add the following Javascript after requirejs and ionic-bootstrap scripts, it can be in the `<head>` or at the bottom of `<body>`
 
 ```javascript
@@ -62,6 +68,7 @@ var bootstrap = {
 
 IonicBootstrap.root_index = '/tab/tab-dash';
 IonicBootstrap.app_name = '[your_app_name]';
+IonicBootstrap.angular = [YourAppVariable]; // I use App
 IonicBootstrap.init(bootstrap, {log_states: true}, function(angular_app_instantiation_function) {
   // you can optionally pass a callback function into ionic bootstrap to do some more stuff before
   // instantiating the application
@@ -71,9 +78,19 @@ IonicBootstrap.init(bootstrap, {log_states: true}, function(angular_app_instanti
 });
 ```
 
-###Step 8
+###Step 9
 
 Refresh with chrome developer tools enabled and check for loading errors on controllers, you should find them.  This is what helps you modularize your code, you'll notice that each controller is expected to be in it's own file named exactly as the controller in the same name as the template (you can change this behavior with some sugar, but I haven't documented that yet), for example: chat-detail => ChatDetailCtrl in js/controllers/ChatDetailCtrl.js.  Add the following files and keep them empty since the controllers are in controller.js.  Ionic puts them into one file, you can change that later if need be.
+
+```bash
+cd www/js/
+mkdir controllers
+cd controllers/
+touch TabDashCtrl.js
+touch TabSettingsCtrl.js
+touch TabProfileCtrl.js
+touch ChatDetailCtrl.js
+```
 
 Then it should run once the controller files have been added.  You can see here that it forces modularization and organizing of your code.
 
