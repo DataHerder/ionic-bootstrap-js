@@ -88,13 +88,94 @@ Angular allows you to assign to a variable the controllers, services and directi
 var App = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services']);
 var Controllers = angular.module('starter.controllers', []);
 var Services = angular.module('starter.services', []);
+
+// ... later on down in app.js
+
+App.filter('myfilter', function() { return function(input){ return input.toString().toUpperCase() } })
+	.run(function($ionicPlatform) { ... })
+	.config(function($stateProvider, $urlRooterProvider) { ... })
+;
 ```
 
 I recommend doing this.  In your controller files specify 
 ```javascript
-Controller.controller('MyControllerCtrl', function($scope) {
+Controllers.controller('MyControllerCtrl', function($scope) {
 	// some controller code
 });
 ``` 
 
 And same with services.  I think it helps.  In your app.js, eventually you take all the controllers and services out and add them as separate files.
+
+###States
+
+In your app.js file, you'll see the states, IonicBootstrap will rewrite the states but you can simply delete them all except the abstract.  If you erase the abstract state, it will break.
+
+```javascript
+.config(function($stateProvider, $urlRouterProvider) {
+	// Ionic uses AngularUI Router which uses the concept of states
+	// Learn more here: https://github.com/angular-ui/ui-router
+	// Set up the various states which the app can be in.
+	// Each state's controller can be found in controllers.js
+	$stateProvider
+
+		// setup an abstract state for the tabs directive
+		.state('tab', {
+			url: "/tab",
+			abstract: true,
+			templateUrl: "templates/tabs.html"
+		})
+
+		// Each tab has its own nav history stack:
+
+		/*.state('tab.TabDashCtrl', {
+			url: '/tab-dash',
+			views: {
+				'tab-dash': {
+					templateUrl: 'templates/tab-dash.html',
+					controller: 'TabDashCtrl'
+				}
+			}
+		})*/
+
+		/*.state('tab.chats', {
+			url: '/chats',
+			views: {
+				'tab-chats': {
+					templateUrl: 'templates/tab-chats.html',
+					controller: 'ChatsCtrl'
+				}
+			}
+		})
+		.state('tab.chat-detail', {
+			url: '/chats/:chatId',
+			views: {
+				'tab-chats': {
+					templateUrl: 'templates/chat-detail.html',
+					controller: 'ChatDetailCtrl'
+				}
+			}
+		})
+
+		.state('tab.account', {
+			url: '/account',
+			views: {
+				'tab-account': {
+					templateUrl: 'templates/tab-account.html',
+					controller: 'AccountCtrl'
+				}
+			}
+		})
+
+		.state('tab.FlashCardsCtrl', {
+			name: "tab.FlashCardsCtrl",
+			url: "/flashcards/flash-cards",
+			views: {
+				flashcards: {
+					controller: "FlashcardsCtrl",
+					templateUrl: "templates/flashcards/flash-cards.html"
+				}
+			}
+		})*/
+	;
+});
+```
