@@ -12,7 +12,7 @@ var IonicBootstrap = Class.extend({
 	_bootstrap_type: '',
 	require_list: [],
 	list_of_modules: [],
-	init: function(app_name, type) {
+	init: function(app_name, app_dependencies, type) {
 
 		// keep namespace obscure
 		if (String.prototype.__ionic_capitalize__ == undefined) {
@@ -25,6 +25,7 @@ var IonicBootstrap = Class.extend({
 
 		this._bootstrap_type = type;
 		this.app_name = app_name;
+		this._app_dependencies = app_dependencies || [];
 	},
 
 	_loadAngularModules: function()
@@ -34,11 +35,15 @@ var IonicBootstrap = Class.extend({
 		if (this.__debug_log) {
 			this.println('Loading App variables');
 		}
-		document.App = angular.module(this.app_name, [
+		var dependencies = [
 			'ionic',
 			this.app_name + '.controllers',
 			this.app_name + '.services'
-		]);
+		];
+		for (var i = 0; i < this._app_dependencies.length; i++) {
+			dependencies.push(this._app_dependencies[i]);
+		}
+		document.App = angular.module(this.app_name, dependencies);
 		document.Controllers = angular.module(this.app_name + '.controllers', []);
 		document.Services = angular.module(this.app_name + '.services', []);
 	},

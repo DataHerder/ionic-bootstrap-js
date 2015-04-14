@@ -77,3 +77,20 @@ Factories can either fit in on file, stay with their respective service or in se
 App.factory('Factory', function() {});
 App.directive( ...
 ```
+
+###Filters
+You specify your filter files an array that you pass to .loaders() method, you then specify the dependency like so:
+
+```javascript
+var loaders = ['filters.js']; // js/filters.js
+/**
+ * the syntax for angular would be like so:
+ * 
+ * angular.module('myFilters', []).filter('filterName', function() {
+ *   return function(input) {
+ *      // do something
+ *      return input;
+ *   }
+ * })
+ */
+var Iot = new IonicBootstrapTabs('my_project', ['myFilters']);

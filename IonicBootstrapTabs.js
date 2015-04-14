@@ -13,13 +13,13 @@
 
 var IonicBootstrapTabs = IonicBootstrap.extend({
 	root_index: '/tab/dash',
-	init: function(app_name) {
+	init: function(app_name, app_dependencies) {
 		if (app_name == undefined || typeof(app_name) != 'string' || app_name == '') {
 			throw new Error('Invalid name for your ionic application.  ' +
 			'When instantiating IonicBootstrapTabs, please pass an app name as a string value.  ' +
 			'Ie: "var Iot = new IonicBootstrapTabs("myApp")');
 		}
-		this._super(app_name, 'IonicTabs');
+		this._super(app_name, app_dependencies, 'IonicTabs');
 		this._loadAngularModules();
 	},
 
