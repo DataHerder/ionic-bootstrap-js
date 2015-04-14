@@ -67,4 +67,9 @@ Services.service('Service', function() {
 ```
 
 ###Factories and directories
-Factories can either fit in on file, stay with their respective service or in separate files.  Directories are also not inforced.
+Factories can either fit in on file, stay with their respective service or in separate files.  Directories are also not inforced.  You create them with the App variable
+
+```Javascript
+App.factory('Factory', function() {});
+App.directive( ...
+```
