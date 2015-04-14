@@ -60,7 +60,6 @@ var IonicBootstrapTabs = IonicBootstrap.extend({
 		this._parseStates();
 		this._runList(this.__loaders, 'js', this);
 		this._runList(this.list_of_modules, 'js', this);
-		console.log(this.list_of_modules);
 		this._run(cb);
 	},
 
@@ -78,7 +77,9 @@ var IonicBootstrapTabs = IonicBootstrap.extend({
 					}
 					$stateProvider.state(obj['name'], obj['params']);
 				}
-				$urlRouterProvider.otherwise(self.root_index);
+				if (self.__debug_log === false) {
+					$urlRouterProvider.otherwise(self.root_index);
+				}
 			});
 			if (cb) {
 				cb(function(){
@@ -91,6 +92,7 @@ var IonicBootstrapTabs = IonicBootstrap.extend({
 	},
 
 	state_objects: [],
+
 	/**
 	 * Create the state objects from the passed states
 	 *
@@ -113,8 +115,8 @@ var IonicBootstrapTabs = IonicBootstrap.extend({
 								resolve = false
 							;
 							if (this._getType(_state_) === 'string') {
-								url =
-								template_name = _state_.replace(/(\/?\:.*)/, '').replace(/\/$/, '');
+								url = _state_;
+								template_name = url.replace(/(\/?\:.*)/, '').replace(/\/$/, '');
 								controller_name = template_name.replace(/-/g, ' ')
 									.__ionic_capitalize__()
 									.replace(/\s/g, '') + 'Ctrl';
