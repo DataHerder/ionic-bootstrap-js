@@ -44,7 +44,7 @@ Iot.loaders([])  // other files from the js/lib or js/vendors to load
 // bootstrap ionic project, executes the code
 // that runs states, loads files etc...
 Iot.bootstrap();
-``
+```
 
 ###controllers
 
@@ -53,7 +53,7 @@ Controller scripts go into js/controllers and you create them with the following
 Controllers.controller('ControllerCtrl', function($scope) {
     // ... some code
 });
-``
+```
 
 ###services
 
@@ -64,7 +64,7 @@ Services.service('Service', function() {
 
     };
 });
-``
+```
 
 ###Factories and directories
 Factories can either fit in on file, stay with their respective service or in separate files.  Directories are also not inforced.
