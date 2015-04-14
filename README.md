@@ -45,6 +45,10 @@ Iot.loaders([])  // other files from the js/lib or js/vendors to load
 // that runs states, loads files etc...
 Iot.bootstrap();
 ```
+You can alternatively chain the methods:
+```Javascript
+Iot.debug(true).config().run().states(state_object).loaders([]);
+```
 
 ###controllers
 
