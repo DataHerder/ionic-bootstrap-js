@@ -9,8 +9,6 @@ You can map multiple controllers to the same template using the `::` separator. 
 
 Basically, each tab is a state stack.  Handling that in one large file, or even breaking it apart into files can be cumbersome after it gets big.  What if the client comes back with a change that requires a different structure?  What about maintenance or "version 2"?  Making adjustments, adding on, or changing the stack is now much easier and handled in one spot rather than changing multiple files.
 
-##How to
-
 Currently there is a working ionic tab application in the repo to help you get started.  You can use that as a reference.
 
 Adding into an already existing application may take some time.  It will force files to exist (because of require) with your application controller logic.  Dropping it in with no states and to slowly add states using the variable is the best way to roll out the bootstrap in an existing project.  I highly recommend using Google Chrome Developer Tools.
@@ -70,5 +68,3 @@ Services.service('Service', function() {
 
 ###Factories and directories
 Factories can either fit in on file, stay with their respective service or in separate files.  Directories are also not inforced.
-
-
