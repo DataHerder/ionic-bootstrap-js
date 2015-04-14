@@ -151,6 +151,6 @@ var IonicBootstrap = Class.extend({
 
 	__isFunc: function(func)
 	{
-		return func && Object.toString.call(cb) === '[object Function]';
+		return func && {}.toString.call(func) === '[object Function]';
 	}
 });
