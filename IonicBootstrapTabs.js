@@ -27,9 +27,9 @@ var IonicBootstrapTabs = IonicBootstrap.extend({
 	{
 		var cb = func || false;
 		if (this.__isFunc(cb)) {
-			document.App.config(func);
+			window.App.config(func);
 		} else {
-			document.App.config(function($stateProvider) {
+			window.App.config(function($stateProvider) {
 				// Ionic uses AngularUI Router which uses the concept of states
 				// Learn more here: https://github.com/angular-ui/ui-router
 				// Set up the various states which the app can be in.
@@ -70,7 +70,7 @@ var IonicBootstrapTabs = IonicBootstrap.extend({
 
 		this._runList(this.list_of_modules, 'js', self);
 		require(this.require_list, function() {
-			document.App.config(function($stateProvider, $urlRouterProvider) {
+			window.App.config(function($stateProvider, $urlRouterProvider) {
 				for (var i = 0; i < self.state_objects.length; i++) {
 					var obj = self.state_objects[i];
 					if (self.__debug_log === true) {
