@@ -50,11 +50,20 @@ You can alternatively chain the methods:
 Iot.debug(true).config().run().states(state_object).loaders([]);
 ```
 
+Alternatively you can add extra functionality by passing a function with the angular instantion function passed as the first parameter:
+
+```javascript
+Iot.bootstrap(function(angular_instantiation_function) {
+    // do some more stuff
+    angular_instantiation_function();
+});
+```
+
 ###controllers
 
 Controller scripts go into js/controllers and you create them with the following variable `Controllers`:
 ```javascript
-Controllers.controller('ControllerCtrl', function($scope) {
+document.Controllers.controller('ControllerCtrl', function($scope) {
     // ... some code
 });
 ```
@@ -63,7 +72,7 @@ Controllers.controller('ControllerCtrl', function($scope) {
 
 Services checked in /services directory and you create them with the following variable `Services`:
 ```Javascript
-Services.service('Service', function() {
+document.Services.service('Service', function() {
     this.get = function () {
 
     };
@@ -74,8 +83,8 @@ Services.service('Service', function() {
 Factories can either fit in on file, stay with their respective service or in separate files.  Directories are also not inforced.  You create them with the App variable
 
 ```Javascript
-App.factory('Factory', function() {});
-App.directive( ...
+document.App.factory('Factory', function() {});
+document.App.directive( ...
 ```
 
 ###Filters
@@ -94,3 +103,5 @@ var loaders = ['filters.js']; // js/filters.js
  * })
  */
 var Iot = new IonicBootstrapTabs('my_project', ['myFilters']);
+Iot.config().run().states(states).loaders(loaders);
+Iot.bootstrap();
