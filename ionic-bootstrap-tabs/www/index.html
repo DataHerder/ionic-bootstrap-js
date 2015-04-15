@@ -89,7 +89,7 @@
 	};
 
 	var Iot = new IonicBootstrapTabs('starter');
-	Iot.debug(true).config().run().states(states).loaders([]);
+	Iot.debug(false).config().run().states(states).loaders([]);
 	Iot.bootstrap(function(angular_instantiation_function) {
 		require(['js/controllers.js', 'js/services.js'], function() {
 			angular_instantiation_function();

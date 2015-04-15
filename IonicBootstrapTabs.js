@@ -113,7 +113,7 @@ var IonicBootstrapTabs = IonicBootstrap.extend({
 								controller_name = '',
 								state_name = '',
 								resolve = false
-							;
+								;
 							if (this._getType(_state_) === 'string') {
 								url = _state_;
 								template_name = url.replace(/(\/?\:.*)/, '').replace(/\/$/, '');

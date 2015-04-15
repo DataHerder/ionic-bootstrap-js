@@ -12,7 +12,7 @@ var IonicBootstrap = Class.extend({
 	_bootstrap_type: '',
 	require_list: [],
 	list_of_modules: [],
-	init: function(app_name, type) {
+	init: function(app_name, app_dependencies, type) {
 
 		// keep namespace obscure
 		if (String.prototype.__ionic_capitalize__ == undefined) {
@@ -25,6 +25,7 @@ var IonicBootstrap = Class.extend({
 
 		this._bootstrap_type = type;
 		this.app_name = app_name;
+		this._app_dependencies = app_dependencies || [];
 	},
 
 	_loadAngularModules: function()
@@ -34,28 +35,17 @@ var IonicBootstrap = Class.extend({
 		if (this.__debug_log) {
 			this.println('Loading App variables');
 		}
-		document.App = angular.module(this.app_name, [
+		var dependencies = [
 			'ionic',
 			this.app_name + '.controllers',
 			this.app_name + '.services'
-		]);
-		document.Controllers = angular.module(this.app_name + '.controllers', []);
-		document.Services = angular.module(this.app_name + '.services', []);
-	},
-
-	/**
-	 * Here we are assuming the roles of angular by using
-	 * IonicBootstrap as a wrapper
-	 *
-	 * @param func
-	 */
-	filter: function(func)
-	{
-		var cb = func || false;
-		if (this.__isFunc(cb)) {
-			document.App.filter(func);
+		];
+		for (var i = 0; i < this._app_dependencies.length; i++) {
+			dependencies.push(this._app_dependencies[i]);
 		}
-		return this;
+		window.App = angular.module(this.app_name, dependencies);
+		window.Controllers = angular.module(this.app_name + '.controllers', []);
+		window.Services = angular.module(this.app_name + '.services', []);
 	},
 
 	run: function(func) {
@@ -65,9 +55,9 @@ var IonicBootstrap = Class.extend({
 		}
 		var cb = func || false;
 		if (this.__isFunc(cb)) {
-			document.App.run(func);
+			window.App.run(func);
 		} else {
-			document.App.run(function($ionicPlatform) {
+			window.App.run(function($ionicPlatform) {
 				$ionicPlatform.ready(function() {
 					// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 					// for form inputs)
@@ -161,6 +151,6 @@ var IonicBootstrap = Class.extend({
 
 	__isFunc: function(func)
 	{
-		return func && Object.toString.call(cb) === '[object Function]';
+		return func && {}.toString.call(func) === '[object Function]';
 	}
 });
